@@ -2,6 +2,7 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace InvertYMod
 {
@@ -25,18 +26,30 @@ namespace InvertYMod
 			}
 
 			mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-			mls.LogInfo("InvertYMod has awoken.");
+			mls.LogInfo("InvertYMod is running.");
 
 			harmony.PatchAll();
 		}
 	}
 
 	[HarmonyPatch(typeof(InputManager))]
-	class InvertYPatch{
+	class InvertMouseYPatch{
+		//Takes output from InputManager.instance.GetMouseY and multiplies it by -1.
 		[HarmonyPatch("GetMouseY")]
-		[HarmonyPostfix]
+		[HarmonyPostfix]		
 		static void GetInvertedMouseY(ref float __result){
 			__result *= -1f;
+		}
+	}
+
+	[HarmonyPatch(typeof(Input))]
+	class InvertGamepadYPatch2{
+		[HarmonyPatch("GetAxis")]
+		[HarmonyPostfix]
+		static void GetInvertedYAxis(){
+			/*if(){
+
+			}*/
 		}
 	}
 }
