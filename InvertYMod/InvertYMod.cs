@@ -11,7 +11,7 @@ namespace InvertYMod
     {
 		private const string modGUID = "Bobbossa.REPOInvertYMod";
 		private const string modName = "InvertYMod";
-		private const string modVersion = "0.1";
+		private const string modVersion = "1.0";
 
 		private readonly Harmony harmony = new Harmony(modGUID);
 
