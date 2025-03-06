@@ -44,12 +44,14 @@ namespace InvertYMod
 
 	[HarmonyPatch(typeof(Input))]
 	class InvertGamepadYPatch2{
+		//At time of writing there is no controller support so I do not know if this line of thinking will work.
+		//What it should do is check to see if Input.GetAxis("Gamepad Aim Y") is called with "Gamepad Aim Y" as a parameter. If it is, multiply the result by -1.
 		[HarmonyPatch("GetAxis")]
 		[HarmonyPostfix]
-		static void GetInvertedYAxis(){
-			/*if(){
-
-			}*/
+		static void GetInvertedYAxis(ref string __args, ref float __result){
+			if(__args == "Gamepad Aim Y") {
+				__result *= -1f;
+			}
 		}
 	}
 }
